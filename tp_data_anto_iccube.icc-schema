@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<schemaFactory revisionNumber="48">
+    <schemaDefinition group="tp" loadOnStartup="false" name="tp">
+        <activateIncrementalLoad>false</activateIncrementalLoad>
+        <autoCleanUpTableColumns>false</autoCleanUpTableColumns>
+        <colors enabled="false"/>
+        <cube id="704140b5-fabb-43ab-8846-189e5fd34774" name="tpcube">
+            <defaultFacts measureGroupName="table_fact" partitioningType="NONE" uuid="43ae9536-ae0c-4ad9-a8b6-1937c37fea64" aggregateDataSourceFacts="false" dataTableId="182a7f62-25e5-4a48-88ba-82c6685ca827" newGeneration="true" unresolvedRowsBehavior="ERROR">
+                <links dimensionId="875c968d-2fb4-43e8-8799-7e17b811c714">
+                    <viewLinks type="LAST_LEVEL">
+                        <toColumns name="collection_id"/>
+                    </viewLinks>
+                </links>
+                <links dimensionId="ba71f14b-5ddc-4a95-b000-102aed08ca77">
+                    <viewLinks type="LAST_LEVEL">
+                        <toColumns name="mobile_id"/>
+                    </viewLinks>
+                </links>
+                <links dimensionId="3e149557-c66c-41c4-8543-03e5f8c89ec2">
+                    <viewLinks type="LAST_LEVEL">
+                        <toColumns name="subscription_id"/>
+                    </viewLinks>
+                </links>
+                <links dimensionId="2f792885-8acb-49c2-a06c-15f85e73d419">
+                    <viewLinks type="LAST_LEVEL">
+                        <toColumns name="ticket_id"/>
+                    </viewLinks>
+                </links>
+                <links dimensionId="542c742d-afe9-4311-8d6c-a0729c443d4e">
+                    <viewLinks type="LAST_LEVEL">
+                        <toColumns name="user_id"/>
+                    </viewLinks>
+                </links>
+                <measure uuid="d53ebdae-1793-463d-8e87-1cb005018de7" name="Card Count" aggregationType="SUM">
+                    <dataColumn name="card_count"/>
+                    <cellProperties>FORMAT_STRING="Standard"</cellProperties>
+                </measure>
+                <rowFactAggregationType>ADD_ROW</rowFactAggregationType>
+            </defaultFacts>
+        </cube>
+        <jdbcDS dbName="db" dontAddQuotes="false" driverType="POSTGRES" portNumber="5432" serverName="db" user="superuser" disableReadOnlyMode="false" includeSynonyms="false" name="tp">
+            <jdbcDatatable fetchSize="1000" tableName="public.dim_collection" rowLimit="-1" id="ab0b37e1-c441-4c0e-a4dd-3bd8e8ad4ecd">
+                <column name="collection_id" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="owner_id" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="title" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="description" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="visibility" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="color" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="icon" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="updated_at" tableType="TIMESTAMP" type="DATETIME" selected="true"/>
+                <column name="created_at" tableType="TIMESTAMP" type="DATETIME" selected="true"/>
+                <column name="card_count" tableType="BIGINT" type="LONG" selected="true"/>
+            </jdbcDatatable>
+            <jdbcDatatable fetchSize="1000" tableName="public.dim_mobile" rowLimit="-1" id="0190f72b-2e13-4b9f-b305-7ee7955ef513">
+                <column name="mobile_id" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="ai_card_modifications" tableType="DOUBLE" type="DOUBLE" selected="true"/>
+                <column name="date" tableType="TIMESTAMP" type="DATETIME" selected="true"/>
+                <column name="clicks" tableType="DOUBLE" type="DOUBLE" selected="true"/>
+                <column name="feature_name" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="premium_features_usage" tableType="DOUBLE" type="DOUBLE" selected="true"/>
+                <column name="session_duration" tableType="DOUBLE" type="DOUBLE" selected="true"/>
+                <column name="muser_id" tableType="VARCHAR" type="STRING" selected="true"/>
+            </jdbcDatatable>
+            <jdbcDatatable fetchSize="1000" tableName="public.dim_subscription" rowLimit="-1" id="4ed7a904-70b7-4446-9622-17a0437b8f20">
+                <column name="subscription_id" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="action_type" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="date" tableType="TIMESTAMP" type="DATETIME" selected="true"/>
+                <column name="subscription_type" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="suser_id" tableType="VARCHAR" type="STRING" selected="true"/>
+            </jdbcDatatable>
+            <jdbcDatatable fetchSize="1000" tableName="public.dim_ticket" rowLimit="-1" id="cabd6bc4-e990-4d35-957b-057500d42928">
+                <column name="ticket_id" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="tuser_id" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="category" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="date" tableType="TIMESTAMP" type="DATETIME" selected="true"/>
+                <column name="status" tableType="VARCHAR" type="STRING" selected="true"/>
+            </jdbcDatatable>
+            <jdbcDatatable fetchSize="1000" tableName="public.dim_users" rowLimit="-1" id="9b6d8e0a-1f09-454a-aa5d-04d7b0623c34">
+                <column name="user_id" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="email" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="username" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="bio" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="terms_accepted_at" tableType="TIMESTAMP" type="DATETIME" selected="true"/>
+                <column name="updated_at" tableType="TIMESTAMP" type="DATETIME" selected="true"/>
+                <column name="created_at" tableType="TIMESTAMP" type="DATETIME" selected="true"/>
+            </jdbcDatatable>
+            <jdbcDatatable fetchSize="1000" tableName="public.fact_table" rowLimit="-1" id="182a7f62-25e5-4a48-88ba-82c6685ca827">
+                <column name="ticket_id" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="subscription_id" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="mobile_id" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="user_id" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="collection_id" tableType="VARCHAR" type="STRING" selected="true"/>
+                <column name="card_count" tableType="BIGINT" type="LONG" selected="true"/>
+            </jdbcDatatable>
+        </jdbcDS>
+        <multiLevelDimension dynHierAllMember="All $HierarchyName" includeUsedColumn="false" dataTableId="ab0b37e1-c441-4c0e-a4dd-3bd8e8ad4ecd" isDefaultTimeDimension="false" isIndexingByRange="false" isTimeDimension="false" id="875c968d-2fb4-43e8-8799-7e17b811c714" name="collection">
+            <multiLevelHierarchy hasAllLevel="true" allLevelName="All-Level" allMemberName="All" name="collection" isDefault="true" uuid="7ecbc422-894e-4094-ba1b-3a01b8944843">
+                <factAggregationType>MEMBER_AND_ANCESTORS</factAggregationType>
+                <level uuid="18cf4fdc-4cb5-47b7-b137-d7055770d540" name="collection" ignoreNameCollision="false" nameUnique="true" nameUniqueInParent="false" keyUnique="true">
+                    <nameCol name="collection_id"/>
+                    <orderType>NONE</orderType>
+                </level>
+            </multiLevelHierarchy>
+        </multiLevelDimension>
+        <multiLevelDimension dynHierAllMember="All $HierarchyName" includeUsedColumn="false" dataTableId="0190f72b-2e13-4b9f-b305-7ee7955ef513" isDefaultTimeDimension="false" isIndexingByRange="false" isTimeDimension="false" id="ba71f14b-5ddc-4a95-b000-102aed08ca77" name="mobile">
+            <multiLevelHierarchy hasAllLevel="true" allLevelName="All-Level" allMemberName="All" name="mobile" isDefault="true" uuid="c62d4641-f975-4af8-af3e-37ecdf06aba7">
+                <factAggregationType>MEMBER_AND_ANCESTORS</factAggregationType>
+                <level uuid="7dea8d66-4431-4f8d-8f4d-3ed9de53a52f" name="mobile" ignoreNameCollision="false" nameUnique="true" nameUniqueInParent="false" keyUnique="true">
+                    <nameCol name="mobile_id"/>
+                    <orderType>NONE</orderType>
+                    <attribute name="clicks">
+                        <column name="clicks"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                    <attribute name="prenium">
+                        <column name="premium_features_usage"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                    <attribute name="ai_card_session">
+                        <column name="ai_card_modifications"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                    <attribute name="session_duration">
+                        <column name="session_duration"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                    <attribute name="date_mobile">
+                        <column name="date"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                </level>
+            </multiLevelHierarchy>
+        </multiLevelDimension>
+        <multiLevelDimension dynHierAllMember="All $HierarchyName" includeUsedColumn="false" dataTableId="4ed7a904-70b7-4446-9622-17a0437b8f20" isDefaultTimeDimension="false" isIndexingByRange="false" isTimeDimension="false" id="3e149557-c66c-41c4-8543-03e5f8c89ec2" name="subscription">
+            <multiLevelHierarchy hasAllLevel="true" allLevelName="All-Level" allMemberName="All" name="subscription" isDefault="true" uuid="9582f25e-ba83-4202-a0bd-9d65026219f2">
+                <factAggregationType>MEMBER_AND_ANCESTORS</factAggregationType>
+                <level uuid="f4b90b82-9d89-4391-8cf8-239a9f42a022" name="subscription" ignoreNameCollision="false" nameUnique="true" nameUniqueInParent="false" keyUnique="true">
+                    <nameCol name="subscription_id"/>
+                    <orderType>NONE</orderType>
+                    <attribute name="action_type">
+                        <column name="action_type"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                    <attribute name="date_subscription">
+                        <column name="date"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                    <attribute name="subscription_type">
+                        <column name="subscription_type"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                </level>
+            </multiLevelHierarchy>
+        </multiLevelDimension>
+        <multiLevelDimension dynHierAllMember="All $HierarchyName" includeUsedColumn="false" dataTableId="cabd6bc4-e990-4d35-957b-057500d42928" isDefaultTimeDimension="false" isIndexingByRange="false" isTimeDimension="false" id="2f792885-8acb-49c2-a06c-15f85e73d419" name="ticket">
+            <multiLevelHierarchy hasAllLevel="true" allLevelName="All-Level" allMemberName="All" name="ticket" isDefault="true" uuid="3cad0869-6ca1-446f-9e85-d57e3506043f">
+                <factAggregationType>MEMBER_AND_ANCESTORS</factAggregationType>
+                <level uuid="011e378f-3e4e-4796-8065-21f66ef17ff7" name="ticket" ignoreNameCollision="false" nameUnique="true" nameUniqueInParent="false" keyUnique="true">
+                    <nameCol name="ticket_id"/>
+                    <orderType>NONE</orderType>
+                    <attribute name="category">
+                        <column name="category"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                    <attribute name="status">
+                        <column name="status"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                    <attribute name="ticket_date">
+                        <column name="date"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                </level>
+            </multiLevelHierarchy>
+        </multiLevelDimension>
+        <multiLevelDimension dynHierAllMember="All $HierarchyName" includeUsedColumn="false" dataTableId="9b6d8e0a-1f09-454a-aa5d-04d7b0623c34" isDefaultTimeDimension="false" isIndexingByRange="false" isTimeDimension="false" id="542c742d-afe9-4311-8d6c-a0729c443d4e" name="user">
+            <multiLevelHierarchy hasAllLevel="true" allLevelName="All-Level" allMemberName="All" name="user" isDefault="true" uuid="601c6fb2-6dfb-4079-b0cc-c3f56af16ae3">
+                <factAggregationType>MEMBER_AND_ANCESTORS</factAggregationType>
+                <level uuid="585427d4-2fae-40bf-a712-1757c8eade12" name="user" ignoreNameCollision="false" nameUnique="true" nameUniqueInParent="false" keyUnique="true">
+                    <nameCol name="user_id"/>
+                    <orderType>NONE</orderType>
+                    <attribute name="bio" nameIfNull="null">
+                        <column name="bio"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                    <attribute name="email" nameIfNull="null">
+                        <column name="email"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                    <attribute name="terms_accepted_at" nameIfNull="null">
+                        <column name="terms_accepted_at"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                    <attribute name="username" nameIfNull="null">
+                        <column name="username"/>
+                        <orderType>NONE</orderType>
+                    </attribute>
+                </level>
+            </multiLevelHierarchy>
+        </multiLevelDimension>
+        <localization enabled="false"/>
+        <memberPropertyConsistencyCheck>ACTIVE</memberPropertyConsistencyCheck>
+        <reverseLink>false</reverseLink>
+        <script>
+            <content>-- 
+-- Drop all calc. members, sets and functions declared at schema/cube levels. 
+-- 
+
+DROP *
+
+</content>
+        </script>
+        <useFactPartitioning>false</useFactPartitioning>
+        <useUnknownMembersInFacts>true</useUnknownMembersInFacts>
+    </schemaDefinition>
+</schemaFactory>
